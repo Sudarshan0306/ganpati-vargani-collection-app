@@ -14,8 +14,8 @@ export const createContribution = asyncHandler(async (req, res) => {
 export const listContributions = asyncHandler(async (req, res) => {
   const { campaignId, mine, limit = 50, dateFrom, dateTo } = req.query;
   const q = { deletedAt: null };
-  if (campaignId) q.campaignId = new mongoose.Types.ObjectId(campaignId);
-  if (mine === "true") q.collectedBy = new mongoose.Types.ObjectId(req.user.id);
+  if (campaignId) q.campaignId = new mongoose.Types.createFromTime(campaignId);
+  if (mine === "true") q.collectedBy = new mongoose.Types.createFromTime(req.user.id);
   if (dateFrom || dateTo) {
     q.date = {};
     if (dateFrom) q.date.$gte = new Date(dateFrom);

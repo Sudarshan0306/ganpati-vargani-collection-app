@@ -17,12 +17,12 @@ router.post(
   zodValidate(
     z.object({
       body: z.object({
-        campaignId: z.string().min(1),
+        campaignId: z.string().optional(),
         donorId: z.string().min(1),
-        amount: z.number().positive(),
+        amount: z.number().positive(), 
         mode: z.enum(["cash", "upi", "card", "other"]).default("cash"),
         receiptNo: z.string().optional(),
-        date: z.string().datetime().optional(),
+        date: z.string().optional(),
         notes: z.string().optional(),
       }),
     })
